@@ -1,0 +1,6 @@
+name: PvPUI
+main: ARTulloss\PvPUI\PvPUI
+api: [3.0.0]
+version: 1.0.0
+author: ARTulloss
+description: Yes we needed this
