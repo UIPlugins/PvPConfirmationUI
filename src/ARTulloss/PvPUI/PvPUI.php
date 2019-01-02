@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace ARTulloss\PvPUI;
 
 use jojoe77777\FormAPI\SimpleForm;
-
 use pocketmine\entity\Entity;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
