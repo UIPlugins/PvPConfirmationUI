@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 namespace ARTulloss\PvPUI;
 
 use jojoe77777\FormAPI\SimpleForm;
@@ -45,7 +44,7 @@ class PvPUI extends PluginBase implements Listener
 	 */
 	public function sendForm(Player $player, Entity $entity, EntityDamageEvent $event): void
 	{
-		$rand = (bool) mt_rand(0,1); // Make this plugin more functional to make sure they're  actually paying attention;
+		$rand = (bool) mt_rand(0,1); // Make this plugin more functional to make sure they're actually paying attention;
 
 		$closure = function (Player $player, $data) use ($event, $rand, $entity): void
 		{
