@@ -22,6 +22,7 @@ class PvPUI extends PluginBase implements Listener
 	public function onEnable(): void
 	{
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
+		$this->saveDefaultConfig();
 	}
 
 	/**
@@ -46,9 +47,7 @@ class PvPUI extends PluginBase implements Listener
 	 */
 	public function sendForm(Player $player, Entity $entity, EntityDamageEvent $event): void
 	{
-		$rand = (bool) mt_rand(0,1); // Make this plugin more functional to make sure they're  actually paying attention;
-
-		$closure = function (Player $player, $data) use ($event, $rand, $entity): void
+		$closure = function (Player $player, $data) use ($event, $entity): void
 		{
 			$event = clone $event;
 
@@ -66,16 +65,22 @@ class PvPUI extends PluginBase implements Listener
 
 		$form = new YesNoForm($closure, 'Are you sure?');
 
-		$form->randomize();
+		$config = $this->getConfig();
 
-		$form->setForced();
+		if($config->get('Randomized') === true)
+			$form->randomize();
+
+		if($config->get('Forced') === true)
+			$form->setForced();
 
 		$form->registerButtons();
 
-		$form->setImage($form::YES, false, 'textures/ui/checkboxFilledYellow');
-		$form->setImage($form::NO, false, 'textures/ui/checkboxUnFilled');
+		if($config->get('Images') === true) {
+			$form->setImage(YesNoForm::YES, false, 'textures/ui/checkboxFilledYellow');
+			$form->setImage(YesNoForm::NO, false, 'textures/ui/checkboxUnFilled');
+		}
 
-		$form->setContent("Are you sure you want to hit this player?");
+		$form->setContent($config->get('Question'));
 
 		$player->sendForm($form);
 	}
