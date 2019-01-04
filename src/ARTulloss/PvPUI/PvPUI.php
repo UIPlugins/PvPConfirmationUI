@@ -1,8 +1,10 @@
 <?php
 declare(strict_types=1);
+
 namespace ARTulloss\PvPUI;
 
-use jojoe77777\FormAPI\SimpleForm;
+use ARTulloss\LibBoolUI\YesNoForm;
+
 use pocketmine\entity\Entity;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
@@ -44,24 +46,14 @@ class PvPUI extends PluginBase implements Listener
 	 */
 	public function sendForm(Player $player, Entity $entity, EntityDamageEvent $event): void
 	{
-		$rand = (bool) mt_rand(0,1); // Make this plugin more functional to make sure they're actually paying attention;
+		$rand = (bool) mt_rand(0,1); // Make this plugin more functional to make sure they're  actually paying attention;
 
 		$closure = function (Player $player, $data) use ($event, $rand, $entity): void
 		{
 			$event = clone $event;
 
-			if(isset($data)) {
-
-				if($rand)
-					$pvp = !(bool) $data;
-				else
-					$pvp = (bool) $data;
-
-				if($pvp)
-					$event->setCancelled(false);
-
-			} else
-				$this->sendForm($player, $entity, $event);
+			if($data)
+				$event->setCancelled(false);
 
 			// Set the cause by reflection TY @CortexPE
 
@@ -72,17 +64,18 @@ class PvPUI extends PluginBase implements Listener
 			$entity->attack($event);
 		};
 
-		$form = new SimpleForm($closure);
+		$form = new YesNoForm($closure, 'Are you sure?');
 
-		$form->setContent("Are you sure you'd like to PvP?");
+		$form->randomize();
 
-		if($rand) {
-			$form->addButton('Yes');
-			$form->addButton('No');
-		} else {
-			$form->addButton('No');
-			$form->addButton('Yes');
-		}
+		$form->setForced();
+
+		$form->registerButtons();
+
+		$form->setImage($form::YES, false, 'textures/ui/checkboxFilledYellow');
+		$form->setImage($form::NO, false, 'textures/ui/checkboxUnFilled');
+
+		$form->setContent("Are you sure you want to hit this player?");
 
 		$player->sendForm($form);
 	}
