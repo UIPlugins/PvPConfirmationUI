@@ -5,6 +5,6 @@ projects:
   PvPUI:
     path: ""
     libs:
-      - src: ARTulloss\libBoolUI
+      - src: ARTulloss/libBoolUI/libBoolUI
         version: ^1.0.0
 ...
