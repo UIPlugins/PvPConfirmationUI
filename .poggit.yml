@@ -5,6 +5,7 @@ projects:
   PvPUI:
     path: ""
     libs:
-      - src: ARTulloss/libBoolUI
+      - src: UIPlugins/libBoolUI
         version: ^1.0.0
+        vendor: poggit-project
 ...
