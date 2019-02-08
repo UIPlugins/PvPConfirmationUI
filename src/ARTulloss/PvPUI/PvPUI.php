@@ -14,7 +14,7 @@ use pocketmine\plugin\PluginBase;
 
 /**
  * Class PvPUI
- * @package Author\PvPUI
+ * @package ARTulloss\PvPUI
  * @author ARTulloss
  */
 class PvPUI extends PluginBase implements Listener
