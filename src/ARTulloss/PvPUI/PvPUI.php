@@ -57,7 +57,7 @@ class PvPUI extends PluginBase implements Listener
 			// Set the cause by reflection TY @CortexPE
 
 			$refClass = new \ReflectionClass(EntityDamageEvent::class);
-			$refProp = $refClass->getProperty("cause");
+			$refProp = $refClass->getProperty('cause');
 			$refProp->setAccessible(true);
 			$refProp->setValue($event, 666);
 			$entity->attack($event);
@@ -67,15 +67,15 @@ class PvPUI extends PluginBase implements Listener
 
 		$config = $this->getConfig();
 
-		if($config->get('Randomized') === true)
+		if($config->get('Randomized'))
 			$form->randomize();
 
-		if($config->get('Forced') === true)
+		if($config->get('Forced'))
 			$form->setForced();
 
 		$form->registerButtons();
 
-		if($config->get('Images') === true) {
+		if($config->get('Images')) {
 			$form->setImage(YesNoForm::YES, false, 'textures/ui/checkboxFilledYellow');
 			$form->setImage(YesNoForm::NO, false, 'textures/ui/checkboxUnFilled');
 		}
