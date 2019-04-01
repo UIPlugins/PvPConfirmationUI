@@ -1,10 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace ARTulloss\PvPUI;
+namespace ARTulloss\PvPConfirmationUI;
 
-use ARTulloss\PvPUI\libs\ARTulloss\libBoolUI\YesNoForm;
-
+use ARTulloss\PvPConfirmationUI\libs\ARTulloss\libBoolUI\YesNoForm;
 use pocketmine\entity\Entity;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
@@ -12,13 +11,11 @@ use pocketmine\event\Listener;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 
-
 /**
- * Class PvPUI
- * @package ARTulloss\PvPUI
- * @author ARTulloss
+ * Class PvPConfirmationUI
+ * @package ARTulloss\PvPConfirmationUI
  */
-class PvPUI extends PluginBase implements Listener
+class PvPConfirmationUI extends PluginBase implements Listener
 {
     /** @var integer $incrementer */
     private $incrementer;
