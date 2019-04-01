@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace ARTulloss\PvPUI;
 
-use ARTulloss\PvPUI\libs\ARTulloss\libBoolUI;
+use ARTulloss\PvPUI\libs\ARTulloss\libBoolUI\YesNoForm;
 
 use pocketmine\entity\Entity;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
@@ -54,7 +54,7 @@ class PvPUI extends PluginBase implements Listener
 	 */
 	public function sendForm(Player $player, Entity $entity, EntityDamageEvent $event): void
 	{
-        $config = $this->getConfig();
+        $config = $this->getConfig()->getAll();
 		$closure = function (Player $player, $data) use ($config, $event, $entity): void
 		{
 			$event = clone $event;
@@ -69,26 +69,26 @@ class PvPUI extends PluginBase implements Listener
 			$refProp->setAccessible(true);
 			$refProp->setValue($event, 666);
 			$entity->attack($event);
-            if($config->get('Incrementer'))
+            if($config['Incrementer'])
                 $this->incrementer++;
 		};
 
 		$form = new YesNoForm($closure, 'Are you sure?');
 
-		if($config->get('Randomized'))
+		if($config['Randomized'])
 			$form->randomize();
 
-		if($config->get('Forced'))
+		if($config['Forced'])
 			$form->setForced();
 
 		$form->registerButtons();
 
-		if($config->get('Images')) {
+		if($config['Images']) {
 			$form->setImage(YesNoForm::YES, false, 'textures/ui/checkboxFilledYellow');
 			$form->setImage(YesNoForm::NO, false, 'textures/ui/checkboxUnFilled');
 		}
 
-		$form->setContent($config->get('Question'));
+		$form->setContent($config['Question']);
 
 		$player->sendForm($form);
 	}
