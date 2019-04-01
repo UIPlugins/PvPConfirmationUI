@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace ARTulloss\PvPUI;
 
-use ARTulloss\LibBoolUI\YesNoForm;
+use ARTulloss\PvPUI\libs\ARTulloss\libBoolUI;
 
 use pocketmine\entity\Entity;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
@@ -11,6 +11,7 @@ use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\Listener;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
+
 
 /**
  * Class PvPUI
