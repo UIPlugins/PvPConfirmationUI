@@ -1,5 +1,5 @@
 name: PvPUI
-main: ARTulloss\PvPUI\PvPUI
+main: ARTulloss\PvPUI\PvPConfirmationUI
 api: 3.0.0
 version: 1.0.1
 author: ARTulloss
