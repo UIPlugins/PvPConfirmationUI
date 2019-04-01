@@ -4,4 +4,6 @@ Question: Are you sure you want to hit this player?
 Randomized: true
 Forced: true
 Images: true
+Incrementer: true
+Stop After: 100
 ...

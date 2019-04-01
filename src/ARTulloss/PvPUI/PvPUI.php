@@ -19,6 +19,9 @@ use pocketmine\plugin\PluginBase;
  */
 class PvPUI extends PluginBase implements Listener
 {
+    /** @var integer $incrementer */
+    private $incrementer;
+
 	public function onEnable(): void
 	{
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -30,6 +33,9 @@ class PvPUI extends PluginBase implements Listener
 	 * @priority LOW
 	 */
 	public function onCombat(EntityDamageEvent $event): void{
+	    $config = $this->getConfig();
+	    if($config->get('Incrementer') && $this->incrementer > (int) $config->get('Stop After'))
+	        return;
 		$entity = $event->getEntity();
 		if($event instanceof EntityDamageByEntityEvent) {
 			$damager = $event->getDamager();
@@ -47,7 +53,8 @@ class PvPUI extends PluginBase implements Listener
 	 */
 	public function sendForm(Player $player, Entity $entity, EntityDamageEvent $event): void
 	{
-		$closure = function (Player $player, $data) use ($event, $entity): void
+        $config = $this->getConfig();
+		$closure = function (Player $player, $data) use ($config, $event, $entity): void
 		{
 			$event = clone $event;
 
@@ -61,11 +68,11 @@ class PvPUI extends PluginBase implements Listener
 			$refProp->setAccessible(true);
 			$refProp->setValue($event, 666);
 			$entity->attack($event);
+            if($config->get('Incrementer'))
+                $this->incrementer++;
 		};
 
 		$form = new YesNoForm($closure, 'Are you sure?');
-
-		$config = $this->getConfig();
 
 		if($config->get('Randomized'))
 			$form->randomize();
