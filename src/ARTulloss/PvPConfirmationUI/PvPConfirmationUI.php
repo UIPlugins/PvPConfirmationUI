@@ -31,8 +31,8 @@ class PvPConfirmationUI extends PluginBase implements Listener
 	 * @priority LOW
 	 */
 	public function onCombat(EntityDamageEvent $event): void{
-	    $config = $this->getConfig();
-	    if($config->get('Incrementer') && $this->incrementer > (int) $config->get('Stop After'))
+	    $config = $this->getConfig()->getAll();
+	    if($config['Incrementer'] && $this->incrementer > (int) $config['Stop After'])
 	        return;
 		$entity = $event->getEntity();
 		if($event instanceof EntityDamageByEntityEvent) {
