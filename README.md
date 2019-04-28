@@ -7,4 +7,4 @@ This plugin adds a form confirming if you mean to hit a player, it is configurab
 
 This plugin *must* be downloaded from here or it will not work.
 
-https://poggit.pmmp.io/ci/UIPlugins/PvPConfirmationUI/PvPUI
+https://poggit.pmmp.io/ci/UIPlugins/PvPConfirmationUI/PvPConfirmationUI
